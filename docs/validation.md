@@ -57,7 +57,10 @@ performs multiplication in `std::size_t`, without changing the limit or runtime 
 
 The first run also showed that CMake preferred a system `clang-tidy-18` over the installed
 pinned tool. CMake now prefers `clang-tidy` on PATH and verifies version 18.1.8 explicitly.
-The check remains mandatory and treats findings as errors. See the repository's
+The pinned-tool follow-up reached the CLI and flagged incrementing an argument index inside
+a condition. The increment is now a separate statement, preserving the short-circuit bounds
+check. No analyzer check was disabled or downgraded. The check remains mandatory and treats
+findings as errors. See the repository's
 [Actions page](https://github.com/zarine-harutyunyan/FailureLab/actions) for the follow-up result.
 
 ## Reproduce the checks

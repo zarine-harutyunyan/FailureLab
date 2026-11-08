@@ -68,7 +68,8 @@ int execute(int argc, char **argv) {
       throw UsageError("unknown option: " + key);
     if (options.contains(key))
       throw UsageError("duplicate option: " + key);
-    if (++i == argc || std::string(argv[i]).starts_with("--"))
+    ++i;
+    if (i == argc || std::string(argv[i]).starts_with("--"))
       throw UsageError(key + ": missing value");
     options[key] = argv[i];
   }

@@ -21,8 +21,9 @@
   writers or atomic replacement of nonempty directories. Inspect stale locks after a crash.
 - CSV provides aggregate metrics, state durations and transition count; full transitions and
   optional bounded events are in JSON. A truncated trace cannot reconstruct every event.
-- Linux/macOS are intended targets. Windows and remote CI are unverified. Local validation
-  gaps are explicit in [validation.md](validation.md).
+- Linux GCC/Clang and macOS build/test jobs have passed on GitHub, alongside Linux sanitizers.
+  Windows is unsupported. Toolchain-specific analysis limits are explicit in
+  [validation.md](validation.md).
 
 These are modeling and validation boundaries of a portfolio project, not claims of professional
 C++ employment, production traffic experience or a production networking implementation.
