@@ -1,0 +1,268 @@
+{
+  "configuration": {
+    "arrival_interval_ms": 10,
+    "attempt_timeout_ms": 80,
+    "circuit_breaker": {
+      "failure_threshold": 5,
+      "open_duration_ms": 150
+    },
+    "deadline_ms": 400,
+    "name": "Outage followed by recovery",
+    "request_count": 200,
+    "retry": {
+      "base_delay_ms": 20,
+      "full_jitter": true,
+      "max_attempts": 4,
+      "max_backoff_ms": 160
+    },
+    "schema_version": 1,
+    "seed": 42,
+    "service": {
+      "failure_probability": 0.0,
+      "latency": {
+        "max_ms": 30,
+        "min_ms": 10,
+        "type": "uniform"
+      }
+    },
+    "windows": [
+      {
+        "end_ms": 1000,
+        "service": {
+          "failure_probability": 1.0,
+          "latency": {
+            "max_ms": 20,
+            "min_ms": 20,
+            "type": "uniform"
+          }
+        },
+        "start_ms": 300
+      }
+    ]
+  },
+  "report_version": 1,
+  "results": [
+    {
+      "application_version": "1.0.1",
+      "attempt_amplification": 1.0,
+      "attempt_service_errors": 70,
+      "attempt_timeouts": 0,
+      "breaker_state_duration_ms": null,
+      "breaker_transitions": [],
+      "circuit_rejections": 0,
+      "completion_duration_ms": 2006,
+      "downstream_attempts": 200,
+      "downstream_drain_duration_ms": 2006,
+      "failed_requests": 70,
+      "final_failures": {
+        "circuit_open": 0,
+        "deadline": 0,
+        "service_error": 70,
+        "timeout": 0
+      },
+      "late_completions": 0,
+      "logical_requests_offered": 200,
+      "processed_events": 800,
+      "request_latency": {
+        "p50_ms": 20,
+        "p95_ms": 29,
+        "p99_ms": 30
+      },
+      "retry_attempts": 0,
+      "scenario": "Outage followed by recovery",
+      "schema_version": 1,
+      "seed": 42,
+      "strategy": "baseline",
+      "success_rate": 0.65,
+      "successful_request_latency": {
+        "p50_ms": 22,
+        "p95_ms": 30,
+        "p99_ms": 30
+      },
+      "successful_requests": 130,
+      "successful_requests_per_second": 64.80558325024926,
+      "trace": [],
+      "trace_truncated": false,
+      "workload_arrival_duration_ms": 1990
+    },
+    {
+      "application_version": "1.0.1",
+      "attempt_amplification": 1.99,
+      "attempt_service_errors": 256,
+      "attempt_timeouts": 0,
+      "breaker_state_duration_ms": null,
+      "breaker_transitions": [],
+      "circuit_rejections": 0,
+      "completion_duration_ms": 2006,
+      "downstream_attempts": 398,
+      "downstream_drain_duration_ms": 2006,
+      "failed_requests": 58,
+      "final_failures": {
+        "circuit_open": 0,
+        "deadline": 0,
+        "service_error": 58,
+        "timeout": 0
+      },
+      "late_completions": 0,
+      "logical_requests_offered": 200,
+      "processed_events": 1394,
+      "request_latency": {
+        "p50_ms": 27,
+        "p95_ms": 140,
+        "p99_ms": 140
+      },
+      "retry_attempts": 198,
+      "scenario": "Outage followed by recovery",
+      "schema_version": 1,
+      "seed": 42,
+      "strategy": "fixed",
+      "success_rate": 0.71,
+      "successful_request_latency": {
+        "p50_ms": 23,
+        "p95_ms": 94,
+        "p99_ms": 147
+      },
+      "successful_requests": 142,
+      "successful_requests_per_second": 70.7876370887338,
+      "trace": [],
+      "trace_truncated": false,
+      "workload_arrival_duration_ms": 1990
+    },
+    {
+      "application_version": "1.0.1",
+      "attempt_amplification": 1.995,
+      "attempt_service_errors": 257,
+      "attempt_timeouts": 0,
+      "breaker_state_duration_ms": null,
+      "breaker_transitions": [],
+      "circuit_rejections": 0,
+      "completion_duration_ms": 2006,
+      "downstream_attempts": 399,
+      "downstream_drain_duration_ms": 2006,
+      "failed_requests": 58,
+      "final_failures": {
+        "circuit_open": 0,
+        "deadline": 0,
+        "service_error": 58,
+        "timeout": 0
+      },
+      "late_completions": 0,
+      "logical_requests_offered": 200,
+      "processed_events": 1397,
+      "request_latency": {
+        "p50_ms": 27,
+        "p95_ms": 168,
+        "p99_ms": 194
+      },
+      "retry_attempts": 199,
+      "scenario": "Outage followed by recovery",
+      "schema_version": 1,
+      "seed": 42,
+      "strategy": "exponential",
+      "success_rate": 0.71,
+      "successful_request_latency": {
+        "p50_ms": 23,
+        "p95_ms": 109,
+        "p99_ms": 186
+      },
+      "successful_requests": 142,
+      "successful_requests_per_second": 70.7876370887338,
+      "trace": [],
+      "trace_truncated": false,
+      "workload_arrival_duration_ms": 1990
+    },
+    {
+      "application_version": "1.0.1",
+      "attempt_amplification": 0.685,
+      "attempt_service_errors": 10,
+      "attempt_timeouts": 0,
+      "breaker_state_duration_ms": {
+        "CLOSED": 1316,
+        "HALF_OPEN": 90,
+        "OPEN": 600
+      },
+      "breaker_transitions": [
+        {
+          "at_ms": 350,
+          "from": "CLOSED",
+          "to": "OPEN"
+        },
+        {
+          "at_ms": 500,
+          "from": "OPEN",
+          "to": "HALF_OPEN"
+        },
+        {
+          "at_ms": 520,
+          "from": "HALF_OPEN",
+          "to": "OPEN"
+        },
+        {
+          "at_ms": 670,
+          "from": "OPEN",
+          "to": "HALF_OPEN"
+        },
+        {
+          "at_ms": 690,
+          "from": "HALF_OPEN",
+          "to": "OPEN"
+        },
+        {
+          "at_ms": 840,
+          "from": "OPEN",
+          "to": "HALF_OPEN"
+        },
+        {
+          "at_ms": 860,
+          "from": "HALF_OPEN",
+          "to": "OPEN"
+        },
+        {
+          "at_ms": 1010,
+          "from": "OPEN",
+          "to": "HALF_OPEN"
+        },
+        {
+          "at_ms": 1040,
+          "from": "HALF_OPEN",
+          "to": "CLOSED"
+        }
+      ],
+      "circuit_rejections": 73,
+      "completion_duration_ms": 2006,
+      "downstream_attempts": 137,
+      "downstream_drain_duration_ms": 2006,
+      "failed_requests": 73,
+      "final_failures": {
+        "circuit_open": 73,
+        "deadline": 0,
+        "service_error": 0,
+        "timeout": 0
+      },
+      "late_completions": 0,
+      "logical_requests_offered": 200,
+      "processed_events": 684,
+      "request_latency": {
+        "p50_ms": 17,
+        "p95_ms": 30,
+        "p99_ms": 33
+      },
+      "retry_attempts": 2,
+      "scenario": "Outage followed by recovery",
+      "schema_version": 1,
+      "seed": 42,
+      "strategy": "breaker",
+      "success_rate": 0.635,
+      "successful_request_latency": {
+        "p50_ms": 22,
+        "p95_ms": 30,
+        "p99_ms": 30
+      },
+      "successful_requests": 127,
+      "successful_requests_per_second": 63.31006979062811,
+      "trace": [],
+      "trace_truncated": false,
+      "workload_arrival_duration_ms": 1990
+    }
+  ]
+}

@@ -1,0 +1,28 @@
+{
+  "schema_version": 1,
+  "name": "Healthy service",
+  "seed": 42,
+  "request_count": 200,
+  "arrival_interval_ms": 10,
+  "deadline_ms": 400,
+  "attempt_timeout_ms": 80,
+  "service": {
+    "latency": {
+      "type": "uniform",
+      "min_ms": 10,
+      "max_ms": 30
+    },
+    "failure_probability": 0
+  },
+  "windows": [],
+  "retry": {
+    "max_attempts": 4,
+    "base_delay_ms": 20,
+    "max_backoff_ms": 160,
+    "full_jitter": true
+  },
+  "circuit_breaker": {
+    "failure_threshold": 5,
+    "open_duration_ms": 150
+  }
+}

@@ -1,0 +1,19 @@
+FailureLab 1.0.1 | deterministic discrete-event simulation
+Outage followed by recovery | seed 42 | schema 1
+strategy       success/offered  success%  attempts    amp  all p95  success p95 (ms)
+baseline         130/200         65.0       200  1.000       29               30
+fixed            142/200         71.0       398  1.990      140               94
+exponential      142/200         71.0       399  1.995      168              109
+breaker          127/200         63.5       137  0.685       30               30
+
+Final failures: service-error / timeout / deadline / circuit-open
+  baseline: 70 / 0 / 0 / 0; attempt errors=70, timeouts=0, rejected=0, late=0
+    logical completion=2006 ms; downstream drain=2006 ms; success throughput=64.806/s
+  fixed: 58 / 0 / 0 / 0; attempt errors=256, timeouts=0, rejected=0, late=0
+    logical completion=2006 ms; downstream drain=2006 ms; success throughput=70.788/s
+  exponential: 58 / 0 / 0 / 0; attempt errors=257, timeouts=0, rejected=0, late=0
+    logical completion=2006 ms; downstream drain=2006 ms; success throughput=70.788/s
+  breaker: 0 / 0 / 0 / 73; attempt errors=10, timeouts=0, rejected=73, late=0
+    logical completion=2006 ms; downstream drain=2006 ms; success throughput=63.310/s; breaker CLOSED/OPEN/HALF_OPEN=1316/600/90 ms
+Arrival duration=1990 ms. All-request latency includes fast failures; success latency excludes them.
+Amplification counts downstream traffic; this model has no capacity or queueing effects.

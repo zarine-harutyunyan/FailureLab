@@ -1,0 +1,41 @@
+{
+  "schema_version": 1,
+  "name": "Slow dependency",
+  "seed": 42,
+  "request_count": 200,
+  "arrival_interval_ms": 10,
+  "deadline_ms": 400,
+  "attempt_timeout_ms": 80,
+  "service": {
+    "latency": {
+      "type": "uniform",
+      "min_ms": 10,
+      "max_ms": 30
+    },
+    "failure_probability": 0
+  },
+  "windows": [
+    {
+      "start_ms": 300,
+      "end_ms": 1000,
+      "service": {
+        "latency": {
+          "type": "uniform",
+          "min_ms": 150,
+          "max_ms": 250
+        },
+        "failure_probability": 0
+      }
+    }
+  ],
+  "retry": {
+    "max_attempts": 4,
+    "base_delay_ms": 20,
+    "max_backoff_ms": 160,
+    "full_jitter": true
+  },
+  "circuit_breaker": {
+    "failure_threshold": 5,
+    "open_duration_ms": 150
+  }
+}
