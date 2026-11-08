@@ -14,8 +14,8 @@ they do not make the modeled service slower.
 ## Build and test
 
 Targets: Linux (GCC/Clang) and macOS (Apple Clang), C++20, CMake 3.25+, Ninja, Python 3.9+.
-Windows is outside this release. Debug/release tests and supported local sanitizer checks
-are verified on macOS; Linux and remote CI remain unverified. See the complete
+Windows is outside this release. Debug/release builds and tests have passed on Linux
+(GCC/Clang) and macOS, with ASan/UBSan also checked locally and on Linux CI. See the complete
 [validation record](docs/validation.md).
 
 Install build tools through your package manager, or in a local virtual environment:

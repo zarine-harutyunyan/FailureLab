@@ -157,7 +157,7 @@ Scenario load_config(const std::filesystem::path &path) {
   if (!input)
     throw ConfigError(path.string() + ": cannot open scenario");
   // Bound the read itself as well as the stat: the file may grow between those operations.
-  constexpr std::size_t limit = 1024 * 1024;
+  constexpr std::size_t limit = std::size_t{1024} * 1024;
   std::string contents(limit + 1, '\0');
   input.read(contents.data(), static_cast<std::streamsize>(contents.size()));
   auto bytes = static_cast<std::size_t>(input.gcount());

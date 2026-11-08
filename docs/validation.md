@@ -2,8 +2,9 @@
 
 The previous blocked unit-test gap is closed. A fresh build directory successfully fetched both
 checksum-pinned dependencies, built the application and unit tests, and passed CTest on this
-macOS machine. Debug, release and supported local sanitizer tests also passed. Linux and remote
-CI remain unverified; no remote run, push, publication or upload was performed.
+macOS machine. Debug, release and supported local sanitizer tests also passed. The initial
+GitHub Actions run subsequently passed Linux GCC/Clang, macOS, and Linux sanitizer jobs.
+The repository is private; application archives have not been publicly released.
 
 ## Environment
 
@@ -31,19 +32,33 @@ neither Python nor a compiler. CPack produces a local archive for this host OS/C
 | Release installation and extracted CPack archive smoke test | Passed |
 | Demo and committed recovery report regeneration | Passed |
 | clang-tidy 18.1.8 | Not a local pass: incompatible with this newer Apple SDK |
-| Linux GCC/Clang, Linux leak detection, remote GitHub Actions | Not run |
+| Linux GCC/Clang and macOS GitHub build/test matrix | Passed |
+| Linux ASan/UBSan and leak detection on GitHub Actions | Passed |
+| Pinned Linux clang-tidy job | See the CI record below for the initial finding and follow-up |
 | Windows | Outside supported release scope |
 
 The permission-denial integration case ran as a non-root user. It is explicitly skipped if
 run as root, which can bypass Unix mode bits; unconditional invalid-output cases still run.
 CTest's macOS environment disables LeakSanitizer because Apple's runtime does not support it.
 AddressSanitizer and UndefinedBehaviorSanitizer are enabled and halt on findings. Linux CI
-is configured to enable leak checking, but that job has not been run here.
+enables leak checking and passed in the initial GitHub Actions run.
 
 clang-tidy 18.1.8 previously exposed enum-size and string-concatenation findings, which were
 corrected. It could not parse newer Apple libc++ intrinsics (`__builtin_clzg`,
 `__is_nothrow_convertible`), so no tidy pass is claimed. The matching installed Apple compiler's
-static analyzer passes with findings fatal. The Linux CI tidy job remains unverified.
+static analyzer passes with findings fatal.
+
+## GitHub CI record
+
+The [initial run](https://github.com/zarine-harutyunyan/FailureLab/actions/runs/42433679742)
+passed Linux GCC, Linux Clang, macOS and Linux sanitizer jobs. The quality job passed formatting
+but found an implicit integer widening in the 1 MiB read-limit constant. The constant now
+performs multiplication in `std::size_t`, without changing the limit or runtime behavior.
+
+The first run also showed that CMake preferred a system `clang-tidy-18` over the installed
+pinned tool. CMake now prefers `clang-tidy` on PATH and verifies version 18.1.8 explicitly.
+The check remains mandatory and treats findings as errors. See the repository's
+[Actions page](https://github.com/zarine-harutyunyan/FailureLab/actions) for the follow-up result.
 
 ## Reproduce the checks
 
@@ -96,6 +111,6 @@ and not a claim of compatibility with older operating systems.
 
 ## Remaining boundaries
 
-Remote CI and Linux execution still need separate verification. There is no Windows support,
+Cross-platform build/test and Linux sanitizer checks have now run on GitHub. There is no Windows support,
 macOS signing/notarization, real networking, queueing or capacity model. Generated numbers are
 simulation results, not hardware benchmarks or evidence of production traffic experience.
